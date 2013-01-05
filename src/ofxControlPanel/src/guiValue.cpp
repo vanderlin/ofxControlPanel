@@ -12,7 +12,7 @@ void guiValue::addValue(float val, float _min, float _max){
 	max.push_back(_max);
 	pct.push_back( 0.0 );
 	bChanged.push_back(true);
-
+    
 	//update our pct
 	updatePct(value.size()-1);
 }
@@ -26,7 +26,7 @@ void guiValue::addValueI(int val, int _min, int _max){
 	max.push_back((float)_max);
 	pct.push_back( 0.0 );
 	bChanged.push_back(true);
-
+    
 	//update our pct
 	updatePct(value.size()-1);
 }
@@ -40,32 +40,32 @@ void guiValue::addValueB(bool val){
 	max.push_back(1);
 	pct.push_back( 0.0 );
 	bChanged.push_back(true);
-
+    
 	//update our pct
 	updatePct(value.size()-1);
 }
 
 //------------------------------------------------
 bool guiValue::setValue(float val, unsigned int which){
-	if(which > 0 && which < value.size() ){
-
+	if(which >= 0 && which < value.size() ){
+        
 		if( max[which] - min[which] == 0 ) return false;
-
+        
 		//check out bounds
 		if(val < min[which])        val = min[which];
 		else if(val > max[which])   val = max[which];
-
+        
 		if( val != value[which] ){
 			bChanged[which] = true;
 		}
-
+        
 		value[which]  =  val;
 		valueI[which] = (int)val;
 		valueB[which] = (bool)val;
-
+        
 		//recalulate our pct
 		updatePct(which);
-
+        
 		return true;
 	}
 	return false;
@@ -88,26 +88,26 @@ void guiValue::clearChangedFlag(){
 
 //------------------------------------------------
 bool guiValue::setValueAsPct(float percent, unsigned int which){
-	if(which > 0 && which < value.size() ){
-
+	if(which >= 0 && which < value.size() ){
+        
 		if( max[which] - min[which] == 0 ) return false;
-
+        
 		if(percent < 0.0) percent = 0.0;
 		else if(percent > 1.0) percent = 1.0;
-
+        
 		pct[which]    =  percent;
-
+        
 		//for bChanged
 		float val = value[which];
-
+        
 		value[which]  =  ( pct[which] * ( max[which] - min[which] ) ) + min[which];
 		valueI[which] = (int)value[which];
 		valueB[which] = (bool)value[which];
-
+        
 		if( val != value[which] ){
 			bChanged[which] = true;
 		}
-
+        
 		return true;
 	}
 	return false;
@@ -115,7 +115,7 @@ bool guiValue::setValueAsPct(float percent, unsigned int which){
 
 //------------------------------------------------
 float guiValue::getValueF(unsigned int which){
-	if(which > 0 && which < value.size() ){
+	if(which >= 0 && which < value.size() ){
 		return value[which];
 	}
 	return 0.0;
@@ -123,7 +123,7 @@ float guiValue::getValueF(unsigned int which){
 
 //------------------------------------------------
 float guiValue::getValueI(unsigned int which){
-	if(which > 0 && which < valueI.size() ){
+	if(which >= 0 && which < valueI.size() ){
 		return valueI[which];
 	}
 	return false;
@@ -131,7 +131,7 @@ float guiValue::getValueI(unsigned int which){
 
 //------------------------------------------------
 float guiValue::getValueB(unsigned int which){
-	if(which > 0 && which < valueB.size() ){
+	if(which >= 0 && which < valueB.size() ){
 		return valueB[which];
 	}
 	return false;
@@ -139,7 +139,7 @@ float guiValue::getValueB(unsigned int which){
 
 //------------------------------------------------
 float guiValue::getMin(unsigned int which){
-	if(which > 0 && which < min.size() ){
+	if(which >= 0 && which < min.size() ){
 		return min[which];
 	}
 	return 0.0;
@@ -147,14 +147,14 @@ float guiValue::getMin(unsigned int which){
 
 //------------------------------------------------
 float guiValue::getMax(unsigned int which){
-	if(which > 0 && which < max.size() ){
+	if(which >= 0 && which < max.size() ){
 		return max[which];
 	}
 	return 0.0;
 }
 void guiValue::setMax( int new_max, unsigned int which )
 {
-	if(which > 0 && which < max.size() )
+	if(which >= 0 && which < max.size() )
 	{
 		max[which] = new_max;
 		updatePct( which );
@@ -163,7 +163,7 @@ void guiValue::setMax( int new_max, unsigned int which )
 
 //------------------------------------------------
 float guiValue::getPct(unsigned int which){
-	if(which > 0 && which < pct.size() ){
+	if(which >= 0 && which < pct.size() ){
 		return pct[which];
 	}
 	return 0.0;
@@ -178,4 +178,3 @@ int guiValue::getNumValues(){
 void guiValue::updatePct(int which){
 	pct[which] = (value[which] - min[which]) / (max[which] - min[which]);
 }
-
