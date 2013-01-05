@@ -163,7 +163,7 @@ void guiValue::setMax( int new_max, unsigned int which )
 
 //------------------------------------------------
 float guiValue::getPct(unsigned int which){
-	if(which >= 0 && which < pct.size() ){
+	if(which > 0 && which < pct.size() ){
 		return pct[which];
 	}
 	return 0.0;
