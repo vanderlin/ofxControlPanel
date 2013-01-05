@@ -47,7 +47,7 @@ void guiValue::addValueB(bool val){
 
 //------------------------------------------------
 bool guiValue::setValue(float val, unsigned int which){
-	if(which >= 0 && which < value.size() ){
+	if(which > 0 && which < value.size() ){
 
 		if( max[which] - min[which] == 0 ) return false;
 
@@ -88,7 +88,7 @@ void guiValue::clearChangedFlag(){
 
 //------------------------------------------------
 bool guiValue::setValueAsPct(float percent, unsigned int which){
-	if(which >= 0 && which < value.size() ){
+	if(which > 0 && which < value.size() ){
 
 		if( max[which] - min[which] == 0 ) return false;
 
@@ -115,7 +115,7 @@ bool guiValue::setValueAsPct(float percent, unsigned int which){
 
 //------------------------------------------------
 float guiValue::getValueF(unsigned int which){
-	if(which >= 0 && which < value.size() ){
+	if(which > 0 && which < value.size() ){
 		return value[which];
 	}
 	return 0.0;
@@ -123,7 +123,7 @@ float guiValue::getValueF(unsigned int which){
 
 //------------------------------------------------
 float guiValue::getValueI(unsigned int which){
-	if(which >= 0 && which < valueI.size() ){
+	if(which > 0 && which < valueI.size() ){
 		return valueI[which];
 	}
 	return false;
@@ -131,7 +131,7 @@ float guiValue::getValueI(unsigned int which){
 
 //------------------------------------------------
 float guiValue::getValueB(unsigned int which){
-	if(which >= 0 && which < valueB.size() ){
+	if(which > 0 && which < valueB.size() ){
 		return valueB[which];
 	}
 	return false;
@@ -139,7 +139,7 @@ float guiValue::getValueB(unsigned int which){
 
 //------------------------------------------------
 float guiValue::getMin(unsigned int which){
-	if(which >= 0 && which < min.size() ){
+	if(which > 0 && which < min.size() ){
 		return min[which];
 	}
 	return 0.0;
@@ -147,14 +147,14 @@ float guiValue::getMin(unsigned int which){
 
 //------------------------------------------------
 float guiValue::getMax(unsigned int which){
-	if(which >= 0 && which < max.size() ){
+	if(which > 0 && which < max.size() ){
 		return max[which];
 	}
 	return 0.0;
 }
 void guiValue::setMax( int new_max, unsigned int which )
 {
-	if(which >= 0 && which < max.size() )
+	if(which > 0 && which < max.size() )
 	{
 		max[which] = new_max;
 		updatePct( which );
